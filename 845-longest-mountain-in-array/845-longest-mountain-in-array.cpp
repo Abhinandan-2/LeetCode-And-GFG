@@ -2,54 +2,32 @@ class Solution {
 public:
     int longestMountain(vector<int>& a) {
         
-        int n = a.size(), flag = 1 , pointer = -1,ans = 0,flag2 =0;
-        if(n<3)
-            return 0;
-        for(int i=1;i<n;i++)
+        int n = a.size();
+        
+        int i=1 , f =0,ans=0;
+        while(i<n)
         {
             if(a[i]>a[i-1])
             {
-                if(flag==1)
-                {
-                    if(pointer!=-1)
-                    ans = max(ans,i-1-pointer+1);
-                    pointer = i-1;
-                    flag=0;
-                }
-                if(flag2==1)
-                    flag2=0;
-            }
-            else if(a[i]<a[i-1])
-            {
-                if(flag==0)
-                    flag=1;
-                if(flag2==1)
-                {
-                    pointer = -1;
-                    flag2 = 0;
-                }
+                f = i-1;
+                while(i<n&&a[i]>a[i-1])
+                    i++;
+                if(i==n)
+                    return ans;
+                if(a[i]==a[i-1])
+                    goto la;
+                while(i<n&&a[i]<a[i-1])
+                    i++;
+                ans = max(i-1-f+1,ans);
+                if(i==n)
+                    return ans;
             }
             else
-            {
-                if(flag==1)
-                {
-                    if(pointer!=-1)
-                        ans = max(ans,i-1-pointer+1);
-                    pointer = i+1;
-                }
-                else
-                {
-                    flag =1 ;
-                    pointer = i+1;
-                }
-                flag2 =1;
-            }
+                i++;
+            la:
+            f=0;
         }
-        if(flag==1&&pointer!=-1)
-            ans = max(ans,n-1-pointer+1);
-        
         return ans;
-        
         
         
     }
