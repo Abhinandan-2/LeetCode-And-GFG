@@ -15,7 +15,7 @@ public:
                 sum*=2;
                 if(a[j]=='1')
                     sum++;
-                if(sum<INT_MAX)
+                if(sum<=INT_MAX)
                 m[(int)sum]++;
                 //cout<<sum<<endl;
             }
