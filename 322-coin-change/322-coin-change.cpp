@@ -3,7 +3,7 @@ public:
     int coinChange(vector<int>& a, int k) {
         
         int n = a.size();
-        sort(a.begin(),a.end());
+        //sort(a.begin(),a.end());
         
         vector<vector<int>> dp(k+1,vector<int> (n+1,INT_MAX));
         
