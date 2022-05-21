@@ -1,39 +1,57 @@
 class Solution {
 public:
-    int coinChange(vector<int>& a, int k) {
-        
+    
+    int call(vector<int> &a,int t,vector<vector<int>> &dp)
+    {
         int n = a.size();
-        //sort(a.begin(),a.end());
         
-        vector<vector<int>> dp(k+1,vector<int> (n+1,INT_MAX));
-        
-        for(int i=0;i<=n;i++)
+        if(t==0)
+            return 0;
+        call(a,t-1,dp);
+       
+        for(int i=0;i<n;i++)
         {
-            dp[0][i]  = 0;
-        }
-        
-        for(int i=1;i<=k;i++)
-        {
-            for(int j=1;j<=n;j++)
+            if(t<a[i])
             {
-                if(a[j-1]>i)
+                if(i==0)
+                    dp[t][i] = INT_MAX;
+                else
+                    dp[t][i]  = dp[t][i-1];
+            }
+            else
+            {
+                if(dp[t-a[i]][i]==INT_MAX)
                 {
-                    dp[i][j] = dp[i][j-1];
+                    if(i==0)
+                        dp[t][i] = INT_MAX;
+                    else
+                        dp[t][i] = dp[t][i-1];
                 }
                 else
                 {
-                    if(dp[i-a[j-1]][j]==INT_MAX)
-                        dp[i][j] = dp[i][j-1];
+                    if(i==0)
+                        dp[t][i] = dp[t-a[i]][i]+1;
                     else
-                    dp[i][j] = min(dp[i][j-1],dp[i-a[j-1]][j]+1);
+                        dp[t][i]  = min(dp[t][i-1],dp[t-a[i]][i]+1);
                 }
             }
         }
-        if(dp[k][n]==INT_MAX)
+        return dp[t][n-1];
+        
+        
+    }
+    
+    
+    int coinChange(vector<int>& a, int t) {
+        
+        int n = a.size();
+        
+        vector<vector<int>> dp(t+1,vector<int> (n,-1));
+        for(int i=0;i<n;i++)
+            dp[0][i] = 0;
+        int ans = call(a,t,dp);
+        if(ans==INT_MAX)
             return -1;
-        return dp[k][n];
-        
-        
-        
+        return ans;   
     }
 };
