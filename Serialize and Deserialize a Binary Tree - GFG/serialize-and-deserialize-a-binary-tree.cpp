@@ -195,7 +195,7 @@ class Solution
     
     Node * createTree(vector<int> a,int &i)
     {
-        if(i==a.size()||a[i]==-1)
+        if(i==a.size())
         return NULL;
         Node *t = new Node(a[i]);
         i++;
