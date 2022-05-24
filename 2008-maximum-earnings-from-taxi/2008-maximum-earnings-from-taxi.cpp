@@ -2,30 +2,37 @@
 
 class Solution {
 public:
-    long long maxTaxiEarnings(int t, vector<vector<int>>& a) {
+    long long maxTaxiEarnings(int k, vector<vector<int>>& a) {
         
         int n = a.size();
-        sort(a.begin(),a.end());
-        vector<ll> dp(n) ;
-        vector<int> b(n);
+        unordered_map<int,vector<pair<int,ll>>> m;
+        ll h;
         for(int i=0;i<n;i++)
-            b[i] = a[i][0];
-        
-        dp[n-1] = (ll)a[n-1][1]-(ll)a[n-1][0]+a[n-1][2];
-        ll h,k,f,g,m;
-        for(int i=n-2;i>=0;i--)
         {
-            h = a[i][1];
-            m = lower_bound(b.begin(),b.end(),h)-b.begin();
-            k = a[i][1]-a[i][0]+a[i][2];
-            f=0;
-            if(m!=n)
-            f = dp[m];
-            g = dp[i+1];
-            dp[i] = max(g,k+f);
+            h = a[i][1]-(ll)a[i][0]+(ll)a[i][2];
+            m[a[i][0]].push_back({a[i][1],h});
         }
-        return dp[0];
+        ll f,g,k1;
+        vector<ll> dp(k+1);
+        dp[k] = 0;
+        for(int i=k-1;i>=0;i--)
+        {
+            if(m.count(i))
+            {
+                k1 =0;
+                for(int j=0;j<m[i].size();j++)
+                {
+                    f = dp[m[i][j].first];
+                    g = m[i][j].second;
+                    k1 = max(k1,f+g);
+                }
+                dp[i] = max(k1,dp[i+1]);
+            }
+            else
+                dp[i] = dp[i+1];
+        }
         
+        return dp[0];
         
     }
 };
