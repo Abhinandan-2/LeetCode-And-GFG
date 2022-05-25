@@ -57,7 +57,7 @@ public:
                         }
                             rowh[p[pt].first]=1;
                         }
-                        //row.erase(p[pt].first);
+                        
                         if(!colh.count(p[pt].second)){
                         vector<int> &hcol = col[p[pt].second];
                         for(int ij=0;ij<hcol.size();ij++)
@@ -70,7 +70,7 @@ public:
                         }
                         colh[p[pt].second]=1;
                         }
-                        //row.erase(p[pt].second);
+                        
                         
                         
                     }
@@ -92,7 +92,7 @@ public:
         for(auto i:helpVec)
             mainq.push(i);
         
-        //return helpVec;
+        
         vector<vector<int>> ans(n,vector<int> (m,0));
         
         vector<int> col(m,0),row(n,0);
