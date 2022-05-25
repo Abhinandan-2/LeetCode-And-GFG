@@ -5,7 +5,7 @@ public:
     
     bool call(vector<int> &a,vector<ll> &ans,ll &t,int i)
     {
-        int n = a.size();
+        int n = a.size(),k;
         if(i==n)
         {
             if(ans[0]==t&&ans[0]==ans[1]&&ans[0]==ans[2]&&ans[0]==ans[3])
@@ -15,11 +15,22 @@ public:
         
         for(int j=0;j<4;j++)
         {
-            if(ans[j]+a[i]<=t){
-            ans[j] += a[i];
-            if(call(a,ans,t,i+1))
-                return 1;
-            ans[j]-=a[i];
+            if(ans[j]+a[i]<=t)
+           {
+                k = j-1;
+                while(k>=0)
+                {
+                    if(ans[k]==ans[j])
+                        break;
+                    k--;
+                }
+                if(k==-1)
+                {
+                    ans[j] += a[i];
+                    if(call(a,ans,t,i+1))
+                        return 1;
+                    ans[j]-=a[i];
+                }
             }
         }
         return 0;
