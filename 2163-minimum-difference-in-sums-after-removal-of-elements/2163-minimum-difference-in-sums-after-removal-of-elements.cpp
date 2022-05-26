@@ -11,7 +11,6 @@ public:
             sum1 += a[i];
             q.push(a[i]);
         }
-        //return sum1;
         vector<pair<int,int>> v,p;
         for(int i=m;i<n;i++)
         {
@@ -25,7 +24,6 @@ public:
                 sum2 += v[i].first;
             p[v[i].second].second = i;
         }
-        //return sum2;
         int k=m-1;
         long long ans = sum1-sum2;
         for(int i=0;i<m;i++)
@@ -48,13 +46,6 @@ public:
         }
         
         return ans;
-        
-        
-        
-        
-        
-        
-        
         
     }
 };
