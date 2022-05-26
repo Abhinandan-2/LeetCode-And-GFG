@@ -1,1 +1,1 @@
-​
+**Approch- Minimize the sum of first part and maximize the sum of second part.**
