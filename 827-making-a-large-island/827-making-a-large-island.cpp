@@ -19,7 +19,7 @@ class Solution {
             {
                 i1 = x+x1[k];
                 j1 = y+y1[k];
-                if(i1>=0&&i1<n&&j1>=0&&j1<m&&a[i1][j1]==-2)
+                if(i1>=0&&i1<n&&j1>=0&&j1<m&&a[i1][j1]==1)
                 {
                     a[i1][j1] = mn;
                     q.push({i1,j1});
@@ -34,28 +34,20 @@ class Solution {
 public:
     int largestIsland(vector<vector<int>>& a) {
         
-        int n = a.size() , m = a[0].size(),mn=1;
-        int x1[]  ={0,0,1,-1};
-        int y1[]  = {1,-1,0,0};
+        int n = a.size() , m = a[0].size(),mn=2;
+        int x1[] = {0,0,1,-1};
+        int y1[] = {1,-1,0,0};
+        unordered_map<int,int> mapCount,help;
+        mapCount[0] = 0;
+        int count ,area;
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
                 if(a[i][j]==1)
-                    a[i][j]=-2;
-            }
-        }
-        unordered_map<int,int> mapCount,help;
-        mapCount[0] = 0;
-        int count ;
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                if(a[i][j]==-2)
                 {
-                    count = call(a,i,j,x1,y1,mn);
-                    mapCount[mn] = count;
+                    area = call(a,i,j,x1,y1,mn);
+                    mapCount[mn] = area;
                     mn++;
                 }
             }
