@@ -1,31 +1,27 @@
 class Solution {
-    
-    bool is(unordered_map<char,int> &a,unordered_map<char,int> &b)
-    {
-        
-        for(auto i:a)
-        {
-            if(b.count(i.first))
-                return 0;
-        }
-        return 1; 
-    }
-    
 public:
     int maxProduct(vector<string>& a) {
         
-        int n = a.size(),ans =0,h,k;
-        vector<unordered_map<char,int>> m(n);
+        int n = a.size(),val,help,ans=0,h,k;
+        
+        vector<int> stringVal(n);
+        
         for(int i=0;i<n;i++)
         {
-            for(auto j:a[i])
-                m[i][j]++;
+            val = 0;
+            for(int j=0;j<a[i].size();j++)
+            {
+                help = (1<<(a[i][j]-'a'));
+                val |= help;
+            }
+            stringVal[i] = val;
         }
+        
         for(int i=0;i<n;i++)
         {
             for(int j=i+1;j<n;j++)
             {
-                if(is(m[i],m[j]))
+                if((stringVal[i]&stringVal[j])==0)
                 {
                     h = a[i].size();
                     k = a[j].size();
