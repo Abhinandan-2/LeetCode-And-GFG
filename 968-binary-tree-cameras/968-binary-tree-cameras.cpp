@@ -11,40 +11,40 @@
  */
 class Solution {
     
-    pair<int,int> solve(TreeNode* a,int &ans)
+    pair<int,int> solve(TreeNode* root,int &ans)
     {
-        if(a)
+        if(root)
         {
-            pair<int,int> p, q, notCameraButSafe, notCameraNotSafe;
-            p = solve(a->left,ans);
-            q = solve(a->right,ans);
+            pair<int,int> leftStatus, rightStatus, notCameraButSafe, notCameraNotSafe;
+            leftStatus = solve(root->left,ans);
+            rightStatus = solve(root->right,ans);
             notCameraButSafe = {0,1};
             notCameraNotSafe = {0,0};
-            if(p==notCameraNotSafe)
+            if(leftStatus==notCameraNotSafe)
             {
                 ans++;
                 return {1,1};
             }
-            else if(p==notCameraButSafe )
+            else if(leftStatus==notCameraButSafe )
             {
-                if(q==notCameraNotSafe)
+                if(rightStatus==notCameraNotSafe)
                 {
                     ans++;
                     return {1,1};
                 }
-                else if(q==notCameraButSafe )
+                else if(rightStatus==notCameraButSafe )
                     return {0,0};
                 else
                     return {0,1};
             }
             else
             {
-                if(q==notCameraNotSafe)
+                if(rightStatus==notCameraNotSafe)
                 {
                     ans++;
                     return {1,1};
                 }
-                else if(q==notCameraButSafe )
+                else if(rightStatus==notCameraButSafe )
                     return {0,1};
                 else
                     return {0,1};
@@ -57,8 +57,8 @@ public:
     int minCameraCover(TreeNode* root) {
         
         int ans =0;
-        pair<int,int> p = solve(root,ans),notCameraNotSafe= {0,0};
-        if(p==notCameraNotSafe)
+        pair<int,int> status = solve(root,ans),notCameraNotSafe= {0,0};
+        if(status==notCameraNotSafe)
             ans++;
         return ans;
         
