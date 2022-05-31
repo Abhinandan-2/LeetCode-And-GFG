@@ -1,32 +1,31 @@
 class Solution {
 public:
-    bool hasAllCodes(string a, int t) {
+    bool hasAllCodes(string a, int k) {
         
+        int n = a.size();
         unordered_map<int,int> m;
-        int sum =0,n=a.size();
-        if(t>n)
+        if(k>=n)
             return 0;
-        for(int i=0;i<t;i++)
+        int res =0,pw = pow(2,k);
+        for(int i=0;i<k;i++)
         {
-            sum *= 2;
+            res *= 2;
             if(a[i]=='1')
-                sum++;
+                res++;
         }
-        m[sum]++;
-        int p = pow(2,t);
-        for(int i=t;i<n;i++)
+        m[res]++;
+        for(int i=k;i<n;i++)
         {
-            sum *= 2;
+            res *= 2;
             if(a[i]=='1')
-                sum++;
-            if(a[i-t]=='1')
-                sum-=p;
-            m[sum]++;
+                res++;
+            if(a[i-k]=='1')
+                res -= pw;
+            m[res]++;
         }
-        if(m.size()==p)
+        if(m.size()==pw)
             return 1;
         return 0;
-        
         
     }
 };
