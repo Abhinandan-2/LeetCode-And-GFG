@@ -1,56 +1,40 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
     
-    pair<int,int> solve(TreeNode* root,int &ans)
-    {
-        if(root)
-        {
+    pair<int,int> solve(TreeNode* root,int &ans){
+        
+        if(root!=NULL){
+            
             pair<int,int> leftStatus, rightStatus, notCameraButSafe, notCameraNotSafe;
             leftStatus = solve(root->left,ans);
             rightStatus = solve(root->right,ans);
             notCameraButSafe = {0,1};
             notCameraNotSafe = {0,0};
-            if(leftStatus==notCameraNotSafe)
-            {
+            if(leftStatus==notCameraNotSafe){
                 ans++;
-                return {1,1};
+                return {1,1};        // If the left has no camera and is not covered, this node must have a camera to cover the left child.
             }
-            else if(leftStatus==notCameraButSafe )
-            {
-                if(rightStatus==notCameraNotSafe)
-                {
+            else if(leftStatus==notCameraButSafe ){
+                if(rightStatus==notCameraNotSafe){
                     ans++;
-                    return {1,1};
+                    return {1,1};         // If the right has no camera and it is not covered, this node must have a camera to cover right child.
                 }
                 else if(rightStatus==notCameraButSafe )
-                    return {0,0};
+                    return {0,0};            // If both have no camera and both are covered then this node is not covered and does not have camera.
                 else
-                    return {0,1};
+                    return {0,1};   // If the right has a camera then this node is covered and does not have camera.
             }
-            else
-            {
-                if(rightStatus==notCameraNotSafe)
-                {
+            else{
+                if(rightStatus==notCameraNotSafe){
                     ans++;
-                    return {1,1};
+                    return {1,1};  // If the right has no camera and it is not covered, this node must have a camera to cover right child.
                 }
                 else if(rightStatus==notCameraButSafe )
-                    return {0,1};
+                    return {0,1};    // If the left has a camera then this node is covered and does not have camera.
                 else
-                    return {0,1};
+                    return {0,1};  // If both have a camera then this node is covered and does not have camera.
             }
         }
-        return {0,1};
+        return {0,1};   // If NULL then it is covered and does not have camera.
     }
     
 public:
@@ -60,7 +44,6 @@ public:
         pair<int,int> status = solve(root,ans),notCameraNotSafe= {0,0};
         if(status==notCameraNotSafe)
             ans++;
-        return ans;
-        
+        return ans; 
     }
 };
