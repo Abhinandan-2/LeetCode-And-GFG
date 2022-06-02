@@ -11,89 +11,47 @@
  */
 class Solution {
     
-    void getPermutations(int n,vector<int> &vis,vector<int> &help,vector<vector<int>> &ans)
+    vector<TreeNode*> call(int s,int e,map<pair<int,int>,vector<TreeNode*>> &dp)
     {
-        if(help.size()==n)
+        TreeNode* t = NULL;
+        if(s>e)
+            return {t};
+        if(s==e)
         {
-            ans.push_back(help);
-            return ;
+            t = new TreeNode(s);
+            return {t};
         }
         
-        for(int i=1;i<=n;i++)
+        if(dp.count({s,e}))
+            return dp[{s,e}];
+        vector<TreeNode*> ans,leftNodes,rightNodes;
+        for(int i=s;i<=e;i++)
         {
-            if(vis[i]==-1)
+            leftNodes = call(s,i-1,dp);
+            rightNodes = call(i+1,e,dp);
+            for(int j=0;j<leftNodes.size();j++)
             {
-                help.push_back(i);
-                vis[i]=1;
-                getPermutations(n,vis,help,ans);
-                vis[i]=-1;
-                help.pop_back();
+                for(int k=0;k<rightNodes.size();k++)
+                {
+                    t = new TreeNode(i);
+                    t->left = leftNodes[j];
+                    t->right = rightNodes[k];
+                    ans.push_back(t);
+                }
             }
         }
-        return ;
+        dp[{s,e}] = ans;
+        return ans;
     }
-    
-    TreeNode* insert(TreeNode* a,int vl)
-    {
-        if(a==NULL)
-        {
-            TreeNode *t = new TreeNode(vl);
-            return t;
-        }
         
-        if(vl<a->val)
-        {
-            a->left = insert(a->left,vl);
-            return a;
-        }
-        a->right = insert(a->right,vl);
-        return a;
-    }
-    
-    TreeNode* makeTree(vector<int> &a)
-    {
-        int n = a.size();
-        TreeNode *root = new TreeNode(a[0]);
-        for(int i=1;i<n;i++)
-            root = insert(root,a[i]);
-        return root;
-    }
-    
-    void preorder(TreeNode* a,vector<int> &v)
-    {
-        if(a)
-        {
-            v.push_back(a->val);
-            preorder(a->left,v);
-            preorder(a->right,v);
-        }
-        return ;
-    }
     
     
 public:
     vector<TreeNode*> generateTrees(int n) {
-                
-        vector<vector<int>> all;
-        vector<int> vis(n+1,-1),help;
-        getPermutations(n,vis,help,all);
         
-        vector<TreeNode*> ans; 
-        TreeNode *root;
-        map<vector<int>,int> mp;
+        map<pair<int,int>,vector<TreeNode*>> dp;
         
-        for(int i=0;i<all.size();i++)
-        {
-            help.clear();
-            root = makeTree(all[i]);
-            preorder(root,help);
-            if(!mp.count(help))
-            {
-                mp[help]=1;
-                ans.push_back(root);
-            }       
-        }
+        vector<TreeNode*> ans = call(1,n,dp);
         return ans;
-        
     }
 };
