@@ -137,7 +137,10 @@ void inorder(Node *root)
 class Solution
 {
     
-    void call(Node* a)
+    
+    public:
+    //Function to connect nodes at same level.
+    void connect(Node *a)
     {
         if(!a)
         return ;
@@ -173,17 +176,8 @@ class Solution
             p=p->nextRight;
         }
         
-        call(n);
+        connect(n);
         return ;
-    }
-    
-    public:
-    //Function to connect nodes at same level.
-    void connect(Node *r)
-    {
-        call(r);
-        return ;
-        
     }    
       
 };
