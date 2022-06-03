@@ -1,26 +1,26 @@
 class Solution {
 public:
     
-    string call(string a,string b)
-    {
-        int n = a.size() , m = b.size();
+//     string call(string a,string b)
+//     {
+//         int n = a.size() , m = b.size();
         
-        int i=0,j=0;
+//         int i=0,j=0;
         
-        while(i<n&&j<m)
-        {
-            if(a[i]<b[i])
-                return b;
-            if(a[i]>b[i])
-                return a;
-            i++;
-            j++;
-        }
-        if(i==n)
-            return b;
-        return a;
+//         while(i<n&&j<m)
+//         {
+//             if(a[i]<b[i])
+//                 return b;
+//             if(a[i]>b[i])
+//                 return a;
+//             i++;
+//             j++;
+//         }
+//         if(i==n)
+//             return b;
+//         return a;
         
-    }
+//     }
     
     string largestWordCount(vector<string>& a, vector<string>& b) {
         
@@ -48,7 +48,7 @@ public:
                     ans = i.first;
                 }
                 mx = i.second;
-                ans = call(i.first,ans);
+                ans = max(i.first,ans);
             }
         }
         
