@@ -9,7 +9,8 @@ class Solution
     void call(int i,vector<int> a[],int n,int c,int d,vector<int> &v)
     {
         v[i] = 1;
-        
+        if(v[d]==1)
+        return ;
         for(int j=0;j<a[i].size();j++)
         {
             if(v[a[i][j]]==-1&&(i!=c||a[i][j]!=d))
