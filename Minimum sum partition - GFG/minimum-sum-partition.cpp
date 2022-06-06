@@ -11,38 +11,36 @@ class Solution{
 	    int sum =0;
 	    for(int i=0;i<n;i++)
 	    sum += a[i];
-	    int m = sum/2+1;
-	    vector<vector<int>> dp(m,vector<int> (n));
+	    int m = sum/2,ans=0;
+	    vector<int> v(m+1,0), h(m+1,0);
+	    v[0] = 1;
+	    h[0] = 1;
+	    
 	    
 	    for(int i=0;i<n;i++)
-	    dp[0][i] = 1;
-	    int ans =0;
-	    for(int i=1;i<m;i++)
 	    {
-	        for(int j=0;j<n;j++)
+	        for(int j=0;j<=m;j++)
 	        {
 	            if(j==0)
-	            {
-	                if(i==a[j])
-	                    dp[i][j] = 1;
-	                else
-	                    dp[i][j] = 0;
-	            }
+	                v[j] = 1;
 	            else
 	            {
-	               if(dp[i][j-1]==1)
-	                   dp[i][j] =1;
+	               if(h[j]==1)
+	               v[j] = 1;
 	               else
 	               {
-	                   if(a[j]>i)
-	                       dp[i][j] = 0;
+	                   if(j<a[i])
+	                   v[j] = 0;
 	                   else
-	                       dp[i][j] = dp[i-a[j]][j-1];
+	                   v[j] = h[j-a[i]];
 	               }
 	            }
+	            if(v[j]==1)
+	            ans = max(ans,j);
 	        }
-	        if(dp[i][n-1]==1)
-	        ans = i;
+	        h = v;
+	        if(ans==m)
+	        break;
 	    }
 	    
 	    int res = sum-ans;
