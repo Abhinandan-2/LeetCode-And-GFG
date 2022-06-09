@@ -3,76 +3,68 @@ public:
     bool sumGame(string a) {
         
         int n = a.size();
-        
-        int d ,l =0,r=0 ,sum1=0 ,sum2=0 , s;
-        
+        int sumDiff, spaceDiff, leftSpace=0 ,rightSpace=0 ,leftSum=0, rightSum=0;
+    
         for(int i=0;i<n;i++)
         {
             if(i<n/2)
             {
                 if(a[i]!='?')
-                    sum1+=(a[i]-48);
+                    leftSum+=(a[i]-48);
                 else
-                    l++;
+                    leftSpace++;
             }
             else
             {
                 if(a[i]!='?')
-                    sum2+=(a[i]-48);
+                    rightSum+=(a[i]-48);
                 else
-                    r++;
+                    rightSpace++;
             }
         }
         
-        d = sum1-sum2;
-        s = l-r;
-        // cout<<sum1<<" "<<sum2<<" "<<l<<" "<<r<<" "<<d<<" "<<s;
-        if(s==0)
-        {
-            if(d==0)
-                return 0;
-            return 1;
-        }
+        sumDiff = abs(leftSum-rightSum);
+        spaceDiff = abs(leftSpace-rightSpace);
         
-        if(d>0)
+        if(leftSum>rightSum)
         {
-            if(s>0)
-                return 1;
+            if(leftSpace>rightSpace)
+                return true;
             else
             {
-                if(s%2==0)
+                if(spaceDiff%2==0)
                 {
-                    if((9*abs(s)/2)==abs(d))
-                        return 0;
-                    return 1;
+                    if(9*spaceDiff/2==sumDiff)
+                        return false;
+                    return true;
                 }
                 else
-                    return 1;
+                    return true;
             }
         }
-        else if(d<0)
+        else if(leftSum<rightSum)
         {
-            if(s<0)
-                return 1;
+            if(leftSpace<rightSpace)
+                return true;
             else
             {
-                if(s%2==0)
+                if(spaceDiff%2==0)
                 {
-                    if((9*abs(s)/2)==abs(d))
-                        return 0;
-                    return 1;
+                    if(9*spaceDiff/2==sumDiff)
+                        return false;
+                    return true;
                 }
                 else
-                    return 1;
+                    return true;
             }
         }
         else
         {
-            if(s==0)
-                return 0;
-            return 1;
+            if(spaceDiff==0)
+                return false;
+            return true;
         }
         
-        return 0;
+        return false;
     }
 };
