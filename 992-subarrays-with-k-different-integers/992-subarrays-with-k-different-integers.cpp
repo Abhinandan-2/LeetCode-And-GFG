@@ -5,7 +5,7 @@ public:
         list<int> q;
         unordered_map<int,int> v;
         unordered_map<int,list<int> ::iterator> m;
-        int n = a.size() , st =0 ,i=0,ans=0,h;
+        int n = a.size() , start =0 ,i=0,ans=0,h;
         while(m.size()!=k&&i<n)
         {
             q.push_back(i);
@@ -22,7 +22,7 @@ public:
         }
         if(m.size()!=k)
             return 0;
-        ans += (q.front()-st+1);
+        ans += (q.front()-start+1);
         // cout<<i<<" "<<st<<" "<<ans<<" "<<q.front()<<endl;
         while(i<n)
         {
@@ -44,20 +44,16 @@ public:
             v[a[i]]++;
             while(v.size()>k)
             {
-                // if(m.count)
-                v[a[st]]--;
-                if(v[a[st]]==0)
-                    v.erase(a[st]);
-                st++;
+                v[a[start]]--;
+                if(v[a[start]]==0)
+                    v.erase(a[start]);
+                start++;
             }
-            ans += q.front()-st+1;
+            ans += q.front()-start+1;
             // cout<<i<<" "<<st<<" "<<ans<<" "<<q.front()<<endl;
             i++;
         }
         return ans;
-        
-        
-        
         
     }
 };
