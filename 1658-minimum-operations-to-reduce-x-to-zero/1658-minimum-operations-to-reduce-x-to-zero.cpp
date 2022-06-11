@@ -30,16 +30,12 @@ public:
             if(v[i]>x)
                 break;
             if(v[i]==x)
-            {
                 ans = min(ans,i+1);
-            }
             else
             {
                 t = x-v[i];
                 if(b.count(t))
-                {
                     ans = min(ans,i+1+b[t]+1);
-                }
             }
         }
         
@@ -48,23 +44,17 @@ public:
             if(p[i]>x)
                 break;
             if(p[i]==x)
-            {
                 ans = min(ans,n-i);
-            }
             else
             {
                 t = x-p[i];
                 if(m.count(t))
-                {
                     ans = min(ans,n-i+m[t]+1);
-                }
             }
         }
         
         if(ans==INT_MAX)
             return -1;
-        return ans;
-        
-        
+        return ans;   
     }
 };
