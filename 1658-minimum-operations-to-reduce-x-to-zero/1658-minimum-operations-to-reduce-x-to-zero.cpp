@@ -2,59 +2,81 @@ class Solution {
 public:
     int minOperations(vector<int>& a, int x) {
         
-        int n = a.size(),t;
-        int sum = accumulate(a.begin(),a.end(),0);
+        int sum =0 , n = a.size() , f=0 , ans = INT_MAX , j =-1 ,i,h ;
+        // cout<<ans<<endl;
+        sum = accumulate(a.begin(),a.end(),0);
         if(x>sum)
             return -1;
         if(x==sum)
             return n;
-        unordered_map<int,int> m,b;
-        vector<int> v =a , p =a ;
-        m[v[0]] = 0;
-        for(int i=1;i<n;i++)
-        {
-            v[i] += v[i-1];
-            m[v[i]] = i;
-        }
-        b[p[n-1]] = 0;
-        for(int i=n-2;i>=0;i--)
-        {
-            p[i] += p[i+1];
-            b[p[i]] = (n-1-i);
-        }
-        
-        int ans = INT_MAX;
-        
+        sum =0;
         for(int i=0;i<n;i++)
         {
-            if(v[i]>x)
+            sum += a[i];
+            if(sum<x)
+                j = i;
+            else if(sum==x)
+            {
+                j=i;
                 break;
-            if(v[i]==x)
-                ans = min(ans,i+1);
+            }
             else
             {
-                t = x-v[i];
-                if(b.count(t))
-                    ans = min(ans,i+1+b[t]+1);
+                sum -= a[i];
+                break;
             }
         }
-        
-        for(int i=n-1;i>=0;i--)
+        if(j==-1)
         {
-            if(p[i]>x)
-                break;
-            if(p[i]==x)
-                ans = min(ans,n-i);
-            else
-            {
-                t = x-p[i];
-                if(m.count(t))
-                    ans = min(ans,n-i+m[t]+1);
-            }
+            f=1;
+            j =n-1;
+            sum=0;
         }
-        
+        // cout<<sum<<" "<<ans<<endl;
+        if(sum==x)
+        ans = min(ans,j+1);
+        i = n-1;
+        while(1)
+        {
+            // cout<<ans<<endl;
+            sum += a[i];
+            // cout<<i<<" "<<j<<" "<<sum<<" "<<f<<endl;
+            while(sum>x)
+            {
+                sum -= a[j];
+                j--;
+                if(j==-1)
+                {
+                    
+                    j = n-1;
+                    f++;
+                }
+                // cout<<sum<<" "<<j<<" "<<f<<endl;
+            } 
+            if(f>1)
+                break;
+            // cout<<ans<<endl;
+            if(f==1&&j<n-1)
+                break;
+            if(sum==x)
+            {
+                if(f==1)
+                    ans = min(ans,j-i+1);
+                else
+                {
+                    h = j+1;
+                    h += (n-i);
+                    ans = min(ans,h);
+                }
+            }
+            // cout<<ans<<endl;
+            i--;
+        }
+        // cout<<ans;
         if(ans==INT_MAX)
             return -1;
-        return ans;   
+        return ans;
+        
     }
 };
+
