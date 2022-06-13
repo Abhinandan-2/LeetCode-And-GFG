@@ -5,7 +5,6 @@ public:
         vector<vector<pair<int,double>>> a(n);
         for(int i=0;i<ed.size();i++)
         {
-            // cout<<i;
             a[ed[i][0]].push_back({ed[i][1],s[i]});
             a[ed[i][1]].push_back({ed[i][0],s[i]});
         }
@@ -15,35 +14,39 @@ public:
         //         cout<<j.first<<" "<<j.second<<" ";
         //     cout<<endl;
         // }
-        vector<int> v(n,-1);
-        unordered_map<int,double> m;
-        v[st] = 1;
-        for(int j=0;j<a[st].size();j++)
-            m[a[st][j].first] = a[st][j].second;
-        double mx;
-        int f;
-        while(m.size()!=0)
+        vector<double> dis(n,-1);
+        set<pair<double,int>> m;
+        pair<double,int> p;
+        dis[st] = 0.0;
+        m.insert({0.0,st});
+        int node,u;
+        double d,curdis,temp;
+        while(!m.empty())
         {
-            mx = -1.0;
-            for(auto i:m)
+            auto it = m.end();
+            it--;
+            p = *it;
+            m.erase(it);
+            node = p.second;
+            // cout<<node<<" ";
+            d = p.first;
+            if(node==en)
+                return d;
+            for(int j=0;j<a[node].size();j++)
             {
-                // cout<<i.first<<" "<<i.second<<endl;
-                if(i.second>mx)
+                u = a[node][j].first;
+                curdis = a[node][j].second;
+                if(d==0.0)
+                    temp = curdis;
+                else if(curdis==0.0)
+                    temp = d;
+                else
+                    temp = d*curdis;
+                if(dis[u]<temp)
                 {
-                    mx = i.second;
-                    f = i.first;
-                }
-            }
-            // cout<<f<<" ";
-            m.erase(f);
-            v[f] = 1;
-            if(f==en)
-                return mx;
-            for(int j=0;j<a[f].size();j++)
-            {
-                if(v[a[f][j].first]==-1)
-                {
-                    m[a[f][j].first] = max(m[a[f][j].first],mx*a[f][j].second);
+                    m.erase({dis[u],u});
+                    dis[u] = temp;
+                    m.insert({dis[u],u});
                 }
             }
         }
