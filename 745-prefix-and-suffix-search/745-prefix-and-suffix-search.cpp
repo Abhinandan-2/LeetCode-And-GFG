@@ -1,121 +1,34 @@
-class node {
-    
-    public :
-    
-    char val;
-    vector<int> v;
-    unordered_map<char,node*> m;
-    node(char p){
-        val = p;
-    }
-    
-};
-
-
-class trie
-{
-    node *root ;
-    public :
-    
-    trie(){
-        root = new node('/0');
-    }
-    
-    void insert(string a,int k)
-    {
-        node *p= root;
-        int n = a.size();
-        for(int i=0;i<n;i++)
-        {
-            if(p->m.count(a[i]))
-            {
-                p= p->m[a[i]];
-                p->v.push_back(k);
-            }
-            else
-            {
-                node *t = new node(a[i]);
-                t->v.push_back(k);
-                p->m[a[i]] = t;
-                p=p->m[a[i]];
-            }
-        }
-        return ;
-    }
-    
-    vector<int> give(string a)
-    {
-        node *p = root;
-        int n = a.size();
-        for(int i=0;i<n;i++)
-        {
-            if(p->m.count(a[i]))
-            {
-                p=p->m[a[i]];
-            }
-            else
-                return {};
-        }
-        return p->v;
-    }
-    
-    
-};
-
 class WordFilter {
     
-    trie forward , backward;
+    unordered_map<string,int> m;
     
 public:
-    WordFilter(vector<string>& w) {
+    WordFilter(vector<string>& a) {
         
-        int n = w.size();
-        
+        int n = a.size(),k1;
+        string h1 ,h2;
         for(int i=0;i<n;i++)
         {
-            forward.insert(w[i],i);
-            reverse(w[i].begin(),w[i].end());
-            backward.insert(w[i],i);
+            int k1 = a[i].size();
+            for(int j=1;j<=k1;j++)
+            {
+                h1 = a[i].substr(0,j);
+                for(int k=0;k<k1;k++)
+                {
+                    h2 = a[i].substr(k,k1-k);
+                    m[h1+" "+h2] = i;
+                }
+            }
         }
         
-        return ;
+        
     }
     
-    int f(string prefix, string suffix) {
+    int f(string pre, string suf) {
         
-        vector<int> a = forward.give(prefix);
-        reverse(suffix.begin(),suffix.end());
-        vector<int> b = backward.give(suffix);
-        
-        int n = a.size() , m = b.size();
-        
-        
-        if(n>m)
-            swap(a,b);
-        
-        n = a.size();
-        m = b.size();
-        
-        for(int i=n-1;i>=0;i--)
-        {
-            if(binary_search(b.begin(),b.end(),a[i]))
-                return a[i];
-        }
+        if(m.count(pre+" "+suf))
+            return m[pre+" "+suf];
         return -1;
-        
-//         int i=n-1 , j = m-1;
-//         while(i>=0&&j>=0)
-//         {
-//             if(a[i]==b[j])
-//                 return a[i];
-//             if(a[i]>b[j])
-//                 i--;
-//             else
-//                 j--;
-//         }
-        
-//         return -1;
-        
         
     }
 };
