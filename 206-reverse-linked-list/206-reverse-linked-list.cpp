@@ -10,18 +10,29 @@
  */
 class Solution {
 public:
+    
+    ListNode* call(ListNode* a,ListNode** ans)
+    {
+        if(!a->next)
+        {
+            *ans = a;
+            return a;
+        }
+        ListNode *p = call(a->next,ans);
+        
+        p->next = a;
+        a->next  = NULL;
+        return a;
+        
+    }
+    
     ListNode* reverseList(ListNode* a) {
         
         if(!a||!a->next)
             return a;
+        ListNode *ans = NULL;
+        call(a,&ans);
+        return ans;
         
-        ListNode *p = reverseList(a->next),*t;
-        a->next = NULL;
-        t = p ;
-        while(t->next)
-            t=t->next;
-        t->next = a;
-        
-        return p;
     }
 };
