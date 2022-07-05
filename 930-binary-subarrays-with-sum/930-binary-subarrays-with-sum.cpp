@@ -2,18 +2,54 @@ class Solution {
 public:
     int numSubarraysWithSum(vector<int>& a, int goal) {
         
-        unordered_map<int,int> m;
-        int n = a.size() , ans =0 , sum =0;
-        m[0]++;
+        int n = a.size() , sum =0 , ans =0 , i =0 ,j =0 ,count=0,k;
+        if(goal==0)
+        {
+            for(int i=0;i<n;i++)
+            {
+                if(a[i]==0)
+                {
+                    count++;
+                    ans +=count;
+                }
+                else
+                    count=0;
+            }
+            return ans;
+        }
         
-        for(int i=0;i<n;i++)
+        
+        while(i<n)
         {
             sum+=a[i];
-            if(m.count(sum-goal))
-                ans += m[sum-goal];
-            m[sum]++;
+            if(sum==goal)
+                break;
+            i++;
         }
-        return ans;
         
+        if(sum!=goal)
+            return 0;
+        k = j;
+        while(k<n&&a[k]==0)
+            k++;
+        ans += (k-j+1);
+        // cout<<ans<<" ";
+        i++;
+        while(i<n)
+        {
+            if(a[i]==0)
+                ans+=(k-j+1);
+            else
+            {
+                count=0;
+                j= k+1;
+                k = j;
+                while(k<n&&a[k]==0)
+                    k++;
+                ans += (k-j+1);
+            }
+            i++;
+        }
+    return ans;
     }
 };
