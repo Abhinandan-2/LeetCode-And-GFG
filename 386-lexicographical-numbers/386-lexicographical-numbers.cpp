@@ -1,19 +1,35 @@
 class Solution {
-public:
     
-    static bool com(int &a,int &b)
+    void dfs(int i,int n,vector<int> &ans)
     {
-        string h = to_string(a);
-        string k = to_string(b);
-        return h<k;
+        int h;
+        for(int j=0;j<=9;j++)
+        {
+            h = i*10;
+            h += j;
+            if(h<=n)
+            {
+                ans.push_back(h);
+                dfs(h,n,ans);
+            }
+        }
+        return ;
     }
     
+public:
     vector<int> lexicalOrder(int n) {
         
-        vector<int> ans(n);
-        for(int i=0;i<n;i++)
-            ans[i] = i+1;
-        sort(ans.begin(),ans.end(),com);
+        vector<int> ans;
+        
+        for(int i=1;i<10;i++)
+        {
+            if(i<=n)
+            {
+                ans.push_back(i);
+                dfs(i,n,ans);
+            }
+            
+        }
         return ans;
     }
 };
