@@ -3,33 +3,22 @@ public:
     vector<int> smallestTrimmedNumbers(vector<string>& a, vector<vector<int>>& t) {
         
         
-        vector<int> ans; // For storing final output
-        priority_queue<pair<string,int>> q;  // For finding kth smallest string
-        
-        
+        vector<int> ans;
+        vector<pair<string,int>> v;
         int res , len;
-        
         string h;
-        
-        for(int i=0;i<t.size();i++)   // Traverse the query array.
+        for(int i=0;i<t.size();i++)
         {
-            len = a[0].size();    // Length is equal 
+            len = a[0].size();
             for(int j=0;j<a.size();j++)
             {
-                
-                h = a[j].substr(len-t[i][1],t[i][1]);  // Sub string after trim
-                
-                q.push({h,j});             // Pushing into Max heap (Queue)
-                
-                if(q.size()>t[i][0])    // If q size greater than k, pop element from the queue. To get the Kth smallest element on top of the queue.
-                    q.pop();
+                h = a[j].substr(len-t[i][1],t[i][1]);
+                v.push_back({h,j});
             }
-            
-            res  = q.top().second;  // Kth smallest element index.
-            
-            while(!q.empty())   // Empty the queue.
-                q.pop();
-             ans.push_back(res);  // Push in output array.
+            sort(v.begin(),v.end());
+            res  = v[t[i][0]-1].second;
+            v.clear();
+            ans.push_back(res);
         }
         
         return ans;
