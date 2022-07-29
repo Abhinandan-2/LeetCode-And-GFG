@@ -3,14 +3,6 @@
 class Solution {
 public:
     
-    struct com
-    {
-        bool operator() (vector<int> &a,vector<int> &b)
-        {
-            return a[2]>b[2];
-        }  
-    };
-    
     int minCost(vector<vector<int>>& a) {
         
         int n = a.size() , m = a[0].size();
@@ -20,16 +12,16 @@ public:
         vector<vector<int>> dp(n,vector<int> (m,INT_MAX));
         vector<vector<bool>> v(n,vector<bool> (m,false));
         
-        priority_queue<vector<int>,vector<vector<int>> , com> q;
+        list<vector<int>> q;
         vector<int> p;
         int x1,y1,cost;
         dp[0][0]=0 ;
-        q.push({0,0,0});
+        q.push_front({0,0,0});
         
         while(!q.empty())
         {
-            p = q.top();
-            q.pop();
+            p = q.front();
+            q.pop_front();
             v[p[0]][p[1]] = true ;
             
             for(int k=0;k<4;k++)
@@ -40,7 +32,10 @@ public:
                 if(x1>=0&&x1<n&&y1>=0&&y1<m&&v[x1][y1]==false&&p[2]+cost<dp[x1][y1])
                 {
                     dp[x1][y1] = p[2]+cost;
-                    q.push({x1,y1,dp[x1][y1]});
+                    if(cost==0)
+                        q.push_front({x1,y1,dp[x1][y1]});
+                    else
+                        q.push_back({x1,y1,dp[x1][y1]});
                 }
             }
             
