@@ -2,31 +2,72 @@ class Solution {
 public:
     string reverseParentheses(string a) {
         
-        stack<string> s;
-        string ans , h ,k ;
-        for(int i=0;i<a.size();i++)
+        int n = a.size(),h;
+        unordered_map<int,int> m;
+        stack<int> s;
+        for(int i=0;i<n;i++)
         {
             if(a[i]=='(')
             {
-                s.push(h);
-                h.clear();
+                s.push(i);
             }
             else if(a[i]==')')
             {
-                reverse(h.begin(),h.end());
-                k = s.top();
+                h = s.top();
                 s.pop();
-                k += h;
-                h = k;
+                m[i] = h;
+                m[h] = i;
+            }
+        }
+        
+        string ans;
+        int i=0,f=0;
+        while(i<n)
+        {
+            if(a[i]=='(')
+            {
+                if(f==0)
+                {
+                    i = m[i];
+                    f=1;
+                    i--;
+                }
+                else
+                {
+                    i= m[i];
+                    f=0;
+                    i++;
+                }
+            }
+            else if(a[i]==')')
+            {
+                if(f==0)
+                {
+                    i = m[i];
+                    f=1;
+                    i--;
+                }
+                else
+                {
+                    i = m[i];
+                    f=0;
+                    i++;
+                }
             }
             else
             {
-                h += a[i];
+                ans.push_back(a[i]);
+                if(f==0)
+                    i++;
+                else
+                    i--;
             }
-            // cout<<h<<" "<<k<<endl;
+                
         }
         
-        return h;
+        return ans;
+        
+        
         
     }
 };
