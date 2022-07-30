@@ -8,29 +8,29 @@ class Solution {
         return 1;
     }
     
-    bool fillLen(vector<int> &a,int i,int t,vector<int> &len)
+    bool fillLen(vector<int> &a,int i,int t,vector<int> &sum)
     {
         int n = a.size();
-        if(isEqual(len,t))
+        if(isEqual(sum,t))
             return 1;
-        int m = len.size(),k;
+        int m = sum.size(),k;
         for(int j=0;j<m;j++)
         {
             k = j-1;
             while(k>=0)
             {
-                if(len[j]==len[k])
+                if(sum[j]==sum[k])
                     break;
                 k--;
             }
             if(k!=-1)
                 continue;
-            if(len[j]+a[i]<=t)
+            if(sum[j]+a[i]<=t)
             {
-                len[j] += a[i];
-                if(fillLen(a,i+1,t,len))
+                sum[j] += a[i];
+                if(fillLen(a,i+1,t,sum))
                     return 1;
-                len[j] -= a[i];
+                sum[j] -= a[i];
             }
         }
         return 0;
@@ -46,8 +46,8 @@ public:
         sort(a.begin(),a.end(),greater<int>());
         if(a[0]>t)
             return 0;
-        vector<int> len(k,0);
-        return fillLen(a,0,t,len);
+        vector<int> subSum(k,0);
+        return fillLen(a,0,t,subSum);
         
     }
 };
