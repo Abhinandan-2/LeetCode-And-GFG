@@ -3,19 +3,13 @@ class Solution {
     bool isEqual(vector<int> &a,int t)
     {
         for(auto i:a)
-        {
             if(i!=t)
                 return 0;
-        }
         return 1;
     }
     
     bool fillLen(vector<int> &a,int i,int t,vector<int> &len)
     {
-        // cout<<i<<endl;
-        // for(auto i:len)
-        //     cout<<i<<" ";
-        // cout<<endl;
         int n = a.size();
         if(isEqual(len,t))
             return 1;
@@ -46,15 +40,13 @@ public:
     bool canPartitionKSubsets(vector<int>& a, int k) {
         
         int sum = accumulate(a.begin(),a.end(),0);
-        if(sum%k!=0)
+        if(sum%k!=0)      
             return 0;
         int t = sum/k;
         sort(a.begin(),a.end(),greater<int>());
         if(a[0]>t)
             return 0;
-        
         vector<int> len(k,0);
-        // cout<<t<<" ";
         return fillLen(a,0,t,len);
         
     }
