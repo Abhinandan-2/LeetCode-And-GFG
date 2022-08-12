@@ -10,7 +10,7 @@ public:
         {
             remainder = n%base;
             n /= -2;
-            if(remainder==-1)
+            if(remainder==-1)      // IMP...
             {
                 remainder += (-base) ;
                 n++;
