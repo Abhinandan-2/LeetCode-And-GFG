@@ -1,32 +1,33 @@
 class Solution {
 public:
+    
     int findTheLongestSubstring(string a) {
         
-        int n = a.size(),ans=0;
-        map<vector<int>,int> m;
-        vector<int> v(5,0);
-        m[v]=-1;
+        int n = a.size(),ans=0, bit =0,mask;
+        unordered_map<int,int> m;
+        unordered_map<char,int> vowel;
+        vowel['a'] = 0;
+        vowel['e'] = 1;
+        vowel['i'] = 2;
+        vowel['o'] = 3;
+        vowel['u'] = 4;
+        
+        m[bit]=-1;
         for(int i=0;i<n;i++)
         {
-            // cout<<a[i]<<" ";
-            if(a[i]=='a')
-                v[0]++;
-            else if(a[i]=='e')
-                v[1]++;
-            else if(a[i]=='i')
-                v[2]++;
-            else if(a[i]=='o')
-                v[3]++;
-            else if(a[i]=='u')
-                v[4]++;
-            // cout<<1<<" ";
-            for(int j=0;j<5;j++)
-                v[j] %= 2;
-            if(m.count(v))
-                ans = max(ans,i-m[v]);
+            mask = 1;
+            if(vowel.count(a[i]))
+            {
+                mask = mask<<vowel[a[i]];
+                bit ^= mask;
+                if(m.count(bit))
+                    ans= max(ans,i-m[bit]);
+                else
+                    m[bit] = i;
+            }
             else
-                m[v] = i;
-            // cout<<ans<<endl;
+                ans = max(ans,i-m[bit]);
+           
         }
         
         return ans;
