@@ -9,31 +9,31 @@
  * };
  */
 class Solution {
-public:
     
-    bool call(ListNode* a,ListNode **p)
+    bool call(ListNode *a,ListNode **p)
     {
         if(!a)
             return 1;
         
-        bool b = call(a->next,p);
-        
-        if(!b)
+        if(!call(a->next,p))
             return 0;
         
         if(a->val!=(*p)->val)
             return 0;
-        
-        (*p) = (*p)->next;
+        (*p)= (*p)->next;
         return 1;
-        
     }
     
+public:
     bool isPalindrome(ListNode* a) {
         
-        ListNode* p = a ;
+        if(!a||!a->next)
+            return 1;
+        
+        ListNode* p = a;
         
         return call(a,&p);
+        
         
     }
 };
