@@ -30,8 +30,7 @@ public:
         
         while(i<=n){
             m[i] = m[i/2]+m[(i/2)/2];
-            i *= 2;
-            i++;
+            i *= 2; i++;
         }
         
         int ans=0;
