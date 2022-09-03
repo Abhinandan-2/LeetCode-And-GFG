@@ -3,25 +3,13 @@ class Solution {
     vector<int> makeLsp(string &a){
         int n = a.size(),i =1 , len =0 ;
         vector<int> ans(n,0);
-        while(i<n){
-            if(a[len]==a[i]) ans[i++] = ++len;  
-            else{
-                if(len!=0) len = ans[len-1];
-                else ans[i++] = 0;
-            }
-        }
+        while(i<n) a[len]==a[i] ? ans[i++] = ++len : (len!=0 ? len = ans[len-1] : ans[i++] = 0);  
         return ans;
     }
     
     int isSub(string &a,string &b,vector<int> &va){
         int n = a.size(),m=b.size(),i=0,j=0;
-        while(i<n&&j<m){
-            if(a[i]==b[j]){i++;j++;}
-            else{
-                if(i!=0) i = va[i-1];
-                else j++;
-            }
-        }
+        while(i<n&&j<m) a[i]==b[j] ? (i++,j++) :(i!=0 ? i = va[i-1]:j++);
         if(i==n) return j-n;
         return -1;
     }
