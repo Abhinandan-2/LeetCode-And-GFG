@@ -5,7 +5,11 @@
 class Solution {
 public:
     int rand10() {
-        int ans = random()%10+1; // :)
-        return ans;
+        int rnd40 = 7*(rand7()-1)+rand7()-1;
+        while(rnd40>=40)
+        {
+            rnd40 = 7*(rand7()-1)+rand7()-1;
+        }
+        return rnd40%10+1;
     }
 };
