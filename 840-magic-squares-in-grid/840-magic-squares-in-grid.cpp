@@ -1,31 +1,20 @@
 class Solution {
-    
-    bool isDis(int x,int y,vector<vector<int>> &a)
-    {
+    bool isDis(int x,int y,vector<vector<int>> &a){
         unordered_map<int,int> m;
-        
-        for(int i=x;i>x-3;i--)
-        {
-            for(int j=y;j>y-3;j--)
-            {
-                if(m.count(a[i][j])||a[i][j]>9||a[i][j]<1)
-                    return 0;
-                m[a[i][j]]++;
-                    
+        for(int i=x;i>x-3;i--){
+            for(int j=y;j>y-3;j--){
+                if(m.count(a[i][j])||a[i][j]>9||a[i][j]<1) return 0;
+                m[a[i][j]]++;      
             }
         }
-        
         return 1;
     }
     
 public:
-    
     int numMagicSquaresInside(vector<vector<int>>& a) {
         int ans =0 , n = a.size() , m = a[0].size(),r1,r2,r3,c1,c2,c3,d1,d2;
-        for(int i=2;i<n;i++)
-        {
-            for(int j=2;j<m;j++)
-            {
+        for(int i=2;i<n;i++){
+            for(int j=2;j<m;j++){
                 if(!isDis(i,j,a)) continue;
                 r1 = a[i][j]+a[i][j-1]+a[i][j-2];
                 if(r1!=15) continue;
@@ -47,6 +36,5 @@ public:
             }
         }
         return ans;
-        
     }
 };
