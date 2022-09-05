@@ -5,7 +5,7 @@
 class Solution {
 public:
     int rand10() {
-        int ans = random()%10+1;
+        int ans = random()%10+1; // :)
         return ans;
     }
 };
