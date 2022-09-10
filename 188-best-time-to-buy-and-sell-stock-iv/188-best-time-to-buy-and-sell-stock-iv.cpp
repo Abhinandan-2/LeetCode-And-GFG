@@ -3,16 +3,9 @@ class Solution {
         int n = a.size();
         if(k==0||x==n) return 0;
         if(dp[x][k]!=-1) return dp[x][k];
-        int ans =0 ,res;
-        for(int i=x;i<n;i++){
-            if(a[i]>a[x]){
-            res = call(a,i+1,k-1,dp);
-            res += (a[i]-a[x]);
-            ans = max(ans,res);
-            }
-        }
-        res = call(a,x+1,k,dp);
-        ans = max(ans,res);
+        int ans =0;
+        for(int i=x;i<n;i++) if(a[i]>a[x]) ans = max(ans,call(a,i+1,k-1,dp)+(a[i]-a[x]));
+        ans = max(ans,call(a,x+1,k,dp));
         dp[x][k] = ans;
         return ans;
     }
