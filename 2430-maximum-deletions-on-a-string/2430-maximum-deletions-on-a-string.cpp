@@ -1,19 +1,6 @@
 #define ll long long
 
 class Solution {
-    
-    // ll power(ll x,ll y,ll p){
-    //     ll res =1;
-    //     x = x%p;
-    //     if(x==0) return 0;
-    // while (y > 0){
-    // if (y & 1) res = (res*x) % p;
-    //         y = y>>1; 
-    // x = (x*x) % p;
-    // }
-    // return res;
-    // }
-    
     int call(string &a,int i,vector<int> &v,vector<vector<int>> &st){
         int n = a.size();
         if(v[i]!=-1) return v[i];
