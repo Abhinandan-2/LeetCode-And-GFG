@@ -2,17 +2,17 @@
 
 class Solution {
     
-    ll power(ll x,ll y,ll p){
-        ll res =1;
-        x = x%p;
-        if(x==0) return 0;
-	    while (y > 0){
-		    if (y & 1) res = (res*x) % p;
-            y = y>>1; 
-		    x = (x*x) % p;
-	    }
-	    return res;
-    }
+    // ll power(ll x,ll y,ll p){
+    //     ll res =1;
+    //     x = x%p;
+    //     if(x==0) return 0;
+    // while (y > 0){
+    // if (y & 1) res = (res*x) % p;
+    //         y = y>>1; 
+    // x = (x*x) % p;
+    // }
+    // return res;
+    // }
     
     int call(string &a,int i,vector<int> &v,vector<vector<int>> &st){
         int n = a.size();
@@ -38,9 +38,9 @@ public:
         for(int i=0;i<n;i++){
             
             int j= i , k = i+1, len=0;
-            long long val1 =0 , pw = 31 , mod = 1e9+7, val2= 0;
+            long long val1 =0 , pw = 31 ,curPow = 1, mod = 1e9+7, val2= 0;
             while(j>=0&&k<n){
-                val1 += power(pw,len,mod)*(a[j]-97);
+                val1 += curPow*(a[j]-97);
                 val1 %= mod;
                 val2 *= 31;
                 val2 += (a[k]-97);
@@ -49,6 +49,8 @@ public:
                 j--;
                 k++;
                 len++;
+                curPow *= 31;
+                curPow %= mod;
             } 
         }
         int ans = call(a,0,v,st);
