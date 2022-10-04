@@ -44,3 +44,8 @@ public:
         return ans;
     }
 };
+
+// "abfaeamacaagaaac"
+// (polynomial hash collisions are trivial to find; hash and no check for collision = WA)
+
+// "eadbfaaaaaikcaahaaadbgkdaaan"
