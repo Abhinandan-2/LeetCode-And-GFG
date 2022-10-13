@@ -1,16 +1,11 @@
 class Solution {
 public:
     int minOperations(vector<int>& a, vector<int>& b) {
-        int n = a.size()  , m = b.size(), count = 0,p,sumF, sumS;
-        if(n<m) swap(n,m);
-        if(m*6<n) return -1;
-        
+        int n = a.size(), m = b.size(), count = 0, p, sumF, sumS, sum1, sum2, ans = INT_MAX;
+        if(min(n,m)*6<max(n,m)) return -1;
         unordered_map<int,int> first,second;
-        
-        int sum1 = accumulate(a.begin(),a.end(),0);
-        int sum2 = accumulate(b.begin(),b.end(),0);
-        if(sum1<sum2) {swap(a,b); swap(sum1,sum2);}
-        n = a.size() , m = b.size() , sumF = sum1,sumS = sum2;
+        sumF = sum1 = accumulate(a.begin(),a.end(),0), sumS = sum2 = accumulate(b.begin(),b.end(),0);
+        if(sum1<sum2) {swap(a,b); swap(sum1,sum2); swap(n,m); swap(sumF,sumS);}
         first[sum1] =0 ;
         second[sum2] = 0;
         priority_queue<int> q;
@@ -36,13 +31,7 @@ public:
                 p++;
             }
         }
-        
-        int ans = INT_MAX;
-        
         for(int i=sumF;i>=sumS;i--) if(first.count(i)&&second.count(i)) ans = min(ans,first[i]+second[i]);
-        
         return ans;
-        
-        
     }
 };
