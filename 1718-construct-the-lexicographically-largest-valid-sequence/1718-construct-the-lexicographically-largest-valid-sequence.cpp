@@ -3,10 +3,7 @@ public:
     bool call(vector<int> &ans,int i,int n,unordered_map<int,int> &m){
         int sz = ans.size();
         if(i>=sz) return 1;
-        if(ans[i]!=0) {
-            if(call(ans,i+1,n,m)) return 1;
-            return 0;
-        }
+        if(ans[i]!=0) return call(ans,i+1,n,m);
         for(int j=n;j>=1;j--){
             if(m[j]==0&&(j==1||(i+j<sz&&ans[i+j]==0))){
                 ans[i] = j;
