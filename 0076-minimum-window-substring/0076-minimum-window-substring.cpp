@@ -1,13 +1,10 @@
 class Solution {
     bool isGreater(unordered_map<char,int> &runingMap,unordered_map<char,int> &fixMap){
-        for(auto i:fixMap){
-            if(runingMap[i.first]<i.second) return 0;
-        }
+        for(auto i:fixMap) if(runingMap[i.first]<i.second) return 0;
         return 1;
     }
 public:
     string minWindow(string a, string b) {
-        
         int n = a.size() , m = b.size() ,mx= INT_MAX, pos = -1,i=0,j=0;
         unordered_map<char,int> runingMap,fixMap;
         for(auto i:b) fixMap[i]++;
@@ -26,7 +23,6 @@ public:
             i++;
         }
         if(pos==-1) return "";
-        string ans = a.substr(pos-mx+1,mx);
-        return ans;
+        return a.substr(pos-mx+1,mx);
     }
 };
