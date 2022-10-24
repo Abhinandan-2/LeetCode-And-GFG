@@ -15,7 +15,7 @@ class Solution
     vector <int> max_of_subarrays(int *a, int n, int k)
     {
         vector<int> ans;
-        list<int> q;
+        deque<int> q;
         for(int i=0;i<k;i++){
             while(!q.empty()&&a[q.back()]<=a[i])
             q.pop_back();
