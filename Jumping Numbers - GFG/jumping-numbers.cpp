@@ -5,12 +5,10 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  
     bool call(vector<int> &v,vector<int> &a,int i,int f){
         int n = v.size();
         bool h;
         if(i==n) return true;
-        
         if(f==1){
             if(i==1){
                 if(a[0]==0) a[i] = 9;
@@ -62,7 +60,6 @@ class Solution {
         a.resize(n,0);
         a[0] = v[0];
         bool b = call(v,a,1,0);
-        // cout<<b<<" ";
         long long ans =0 ;
         if(b){
             for(int i=0;i<a.size();i++){
