@@ -10,26 +10,14 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:
-
 	ll countSubarray(int a[], int n, int k) {
-	    
 	    ll ans =0,c=0 ;
-	    
 	    for(int i=0;i<n;i++){
-	        if(a[i]>k){
-	            c=0;
-	            ans += (n-i);
-	        }
-	        else{
-	            c++;
-	            ans += (n-i);
-	            ans -= c;
-	        }
+	        ans += (n-i);
+	        a[i]>k ? c=0 :c++;
+	        ans -= c;
 	    }
-	    
 	    return ans;
-	    
-	    
 	}
 };
 
