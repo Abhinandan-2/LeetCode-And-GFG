@@ -6,6 +6,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution{
     public:
     void rearrange(long long *a, int n) { 
@@ -28,6 +29,7 @@ class Solution{
     	return;
     }
 };
+
 
 //{ Driver Code Starts.
 
