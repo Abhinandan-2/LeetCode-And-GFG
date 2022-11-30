@@ -6,24 +6,12 @@ using namespace std;
 
 
 // } Driver Code Ends
-
-#define ll long long
-
 class Solution{
     public:
-    // This function wants you to modify the given input
-    // array and no need to return anything
-    // arr: input array
-    // n: size of array
-    //Function to rearrange  the array elements alternately.
     void rearrange(long long *a, int n) { 
-    	
-    	ll num = 10e10+7;
+    	long long num = 10e10+7;
     	int pos ,orgPos,mid = n/2;
-    	for(int i=0;i<n;i++){
-    	    a[i] = num*i+a[i];
-    	}
-    	
+    	for(int i=0;i<n;i++) a[i] = num*i+a[i];
     	for(int i=0;i<n;i++){
     	    orgPos = -1;
     	    while(i!=orgPos){
@@ -33,22 +21,11 @@ class Solution{
     	            orgPos = n-(2*(pos-mid+1));
     	            if(n%2!=0) orgPos++;
     	        }
-    	       // cout<<i<<" "<<pos<<" "<<orgPos<<endl;
     	        swap(a[i],a[orgPos]);
     	    }
-    	    
     	}
-    	
-    	for(int i=0;i<n;i++){
-    	    a[i] = a[i]%num;
-    	}
-    	
-    	return ;
-    	
-    	
-    	
-    	
-    	 
+    	for(int i=0;i<n;i++) a[i] = a[i]%num;
+    	return;
     }
 };
 
