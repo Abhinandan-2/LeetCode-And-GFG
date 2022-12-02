@@ -1,15 +1,13 @@
 class Solution {
 public:
     bool closeStrings(string a, string b) {
-        int n = a.size() , m = b.size();
-        if(n!=m) return 0;
-        unordered_map<int,int> f,s,v,q;
-        for(auto i:a) f[(int)i]++;
-        for(auto i:b) s[(int)i]++;
-        for(int c=0;c<=26;c++) if((f.count(c+97)&&!s.count(c+97))||(!f.count(c+97)&&s.count(c+97))) return 0;
-        for(auto i:f) v[i.second]++;
-        for(auto i:s) q[i.second]++;
-        if(v!=q) return 0;
+        unordered_map<char,int> m,v;
+        unordered_map<int,int> x,y;
+        for(auto i:a) m[i]++;
+        for(auto i:b) v[i]++;
+        for(auto i:m) {if(!v.count(i.first)) return 0; x[i.second]++;}
+        for(auto i:v) {if(!m.count(i.first)) return 0; y[i.second]++;}
+        if(x!=y) return 0;
         return 1;
     }
 };
