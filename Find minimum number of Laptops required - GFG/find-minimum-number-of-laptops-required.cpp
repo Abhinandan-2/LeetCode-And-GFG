@@ -17,8 +17,7 @@ class Solution {
         sort(line.begin(),line.end());
         int laptop =0 , ans =0 ;
         for(int i=0;i<2*n;i++){
-            if(line[i].second==1) laptop++;
-            else laptop--;
+            line[i].second==1 ? laptop++ : laptop--;
             ans = max(ans,laptop);
         }
         return ans;
