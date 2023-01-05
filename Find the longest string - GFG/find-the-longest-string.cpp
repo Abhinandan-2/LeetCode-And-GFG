@@ -21,7 +21,7 @@ public:
         // vector<string> can;
         string h;
         int  f;
-        auto com = [&](string h,string k){
+        auto com = [&](string &h,string &k){
             if(h.size()>k.size()) return 1;
         else if(h.size()<k.size()) return 0;
         return h<k ? 1 : 0 ;
