@@ -12,17 +12,20 @@ class Solution
 {
 public:
 
-    static bool com(string &a,string &b){
-        if(a.size()>b.size()) return 1;
-        else if(b.size()>a.size()) return 0;
-        return a<b;
-    }
+    // static bool com(string &a,string &b){
+        
+    // }
     string longestString(vector<string> &a)
     {
         unordered_map<string,int> mp;
         // vector<string> can;
         string h;
         int  f;
+        auto com = [&](string h,string k){
+            if(h.size()>k.size()) return 1;
+        else if(h.size()<k.size()) return 0;
+        return h<k ? 1 : 0 ;
+        };
         sort(a.begin(),a.end(),com);
         for(auto &i:a) mp[i]++;
         for(auto &i:a){
