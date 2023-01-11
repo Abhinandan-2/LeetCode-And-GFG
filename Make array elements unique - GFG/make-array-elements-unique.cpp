@@ -10,7 +10,7 @@ using namespace std;
 class Solution {
   public:
     long long int minIncrements(vector<int> a, int n) {
-        int count =1 , extra =0 , gap, diff ;
+        int count =1 , extra =0 , gap ;
         long long int ans =0 ;
         sort(a.begin(),a.end());
         for(int i=1;i<n;i++){
@@ -18,24 +18,17 @@ class Solution {
             else{
                 extra += count-1;
                 gap = a[i]-a[i-1]-1;
-                if(gap==0) ans += extra;
-                else if(gap>=extra){
-                    ans += ((long long int)extra*(extra+1))/2;
-                    extra =0 ;
-                }
+                ans += ((long long int)extra*(extra+1))/2;
+                if(gap>=extra) extra =0 ;
                 else{
-                    diff = extra-gap;
-                    ans +=  ((long long int)extra*(extra+1))/2;
-                    ans -=  ((long long int)diff*(diff+1))/2;
+                    ans -=  ((long long int)(extra-gap)*(extra-gap+1))/2;
                     extra -= gap;
                     ans += extra;
-                    // ans -= ((long long int)(extra-gap)*(extra-gap+1))/2;
                 } 
                 count =1 ;
             }
         }
         extra += count-1;
-        // cout<<extra ;
         ans += ((long long int)extra*(extra+1))/2;
         return ans;
     }
