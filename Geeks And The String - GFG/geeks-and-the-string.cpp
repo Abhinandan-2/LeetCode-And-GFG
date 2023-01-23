@@ -9,10 +9,7 @@ class Solution {
     string removePair(string a) {
         stack<char> s;
         string ans;
-        for(auto &i:a){
-            if(!s.empty()&&s.top()==i) s.pop();
-            else s.push(i);
-        }
+        for(auto &i:a) (!s.empty()&&s.top()==i) ? s.pop() : s.push(i);
         if(s.empty()) return "-1";
         while(!s.empty()){
             ans.push_back(s.top());
