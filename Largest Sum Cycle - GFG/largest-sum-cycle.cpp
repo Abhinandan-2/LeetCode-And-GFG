@@ -10,11 +10,10 @@ class Solution
   public:
   
   int findCircle(vector<int> &a,int cur,vector<int> &vis){
-      int n = a.size();
-      vis[cur] = 0;
+      int n = a.size(),res;
       if(a[cur]==-1){
           vis[cur] = 1;
-           return -1;
+          return -1;
       }
       if(vis[a[cur]]==1){
           vis[cur] = 1;
@@ -24,7 +23,8 @@ class Solution
           vis[cur] = 1;
           return a[cur];
       };
-      int res = findCircle(a,a[cur],vis);
+      vis[cur] = 0;
+      res = findCircle(a,a[cur],vis);
       vis[cur] = 1;
       return res;
   }
@@ -35,17 +35,13 @@ class Solution
   }
   
   long long largestSumCycle(int n, vector<int> a){
-      
       vector<int> vis(n,-1);
-      long long ans = -1 ,res ;
+      long long ans = -1 ;
       int in;
       for(int i=0;i<n;i++){
           if(vis[i]==-1){
               in = findCircle(a,i,vis);
-              if(in!=-1){
-                  res = cycleSum(a,a[in],in);
-                  ans = max(ans,res+in);
-              }
+              if(in!=-1) ans = max(ans,cycleSum(a,a[in],in)+in);
           }
       }
       return ans;
