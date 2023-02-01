@@ -5,10 +5,8 @@ using namespace std;
 
 // } Driver Code Ends
 //User function Template for C++
-class Solution
-{
+class Solution{
   public:
-  
   int findCircle(vector<int> &a,int cur,vector<int> &vis){
       int n = a.size(),res;
       if(a[cur]==-1){
@@ -45,7 +43,6 @@ class Solution
           }
       }
       return ans;
-      
   }
 };
 
