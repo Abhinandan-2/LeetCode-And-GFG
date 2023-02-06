@@ -9,7 +9,6 @@ public:
             for(int j=0;j<len;j++){
                 if(j<len-1&&a[i][j]=='/'&&a[i][j+1]=='/'){
                     if(f==0) break;
-                    
                 }
                 else if(f==0&&j<len-1&&a[i][j]=='/'&&a[i][j+1]=='*'){
                     f=1;
@@ -27,8 +26,5 @@ public:
             if(f==0) h.clear();
         }
         return ans;
-        
     }
 };
-
-// ["/*Test program */","int main()", "{ ", "  // variable de/*claration ", "int a, b, c;"," dfdsdsd ", "/* This is a test", "   multiline  ", "   comment for ", "   testing */", "a = b + c;", "}"]
