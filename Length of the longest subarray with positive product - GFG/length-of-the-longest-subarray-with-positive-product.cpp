@@ -20,35 +20,22 @@ class Solution {
            int ans = 0 , count =0 , st = 0, negEn = -1, negSt = -1 ,f= 0;
            for(int i=0;i<n;i++){
                if(a[i]==0){
-                   if(f==0) ans= max(ans,0);
-                   else{
-                       if(count%2==0){
-                           ans = max(ans,i-st);
-                       }
-                       else{
-                           ans = max({ans,negEn-st,i-negSt-1});
-                       }
-                   }
+                   if(f==1) ans = count%2==0 ? max(ans,i-st) : max({ans,negEn-st,i-negSt-1});
                    count =0 ;
-                   f =0 ;
+                   f = 0 ;
                    negSt = -1;
-               }
-               else if(a[i]<0){
-                   if(f==0){
-                       f=1;
-                       st = i;
-                   }
-                   count++;
-                   if(negSt==-1) negSt = i;
-                   negEn = i;
                }
                else{
                    if(f==0){
                        f=1;
-                       st =i;
-                  }
+                       st = i;
+                   }
+                   if(a[i]<0){
+                       count++;
+                       if(negSt==-1) negSt = i;
+                       negEn = i;
+                   }
                }
-            //   cout<<ans<<" ";
            }
            return ans;
         }
