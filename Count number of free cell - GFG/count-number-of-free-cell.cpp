@@ -13,21 +13,18 @@ using namespace std;
 class Solution{
   public:
   vector<long long int> countZero(int n, int k, vector<vector<int>>& a){
-      
       long long int zero = (long long int)n*n;
       vector<int> row(n+1,0) , col(n+1,0);
       int rSize =0 , cSize =0 ;
       vector<long long int> ans;
       for(int i=0;i<k;i++){
           if(row[a[i][0]]==0){
-              zero -= n;
-              zero += cSize;
+              zero = zero-n+cSize;
               row[a[i][0]] = 1;
               rSize++;
           }
           if(col[a[i][1]]==0){
-              zero -= n;
-              zero += rSize;
+              zero = zero-n+rSize;
               col[a[i][1]] = 1;
               cSize++;
           }
