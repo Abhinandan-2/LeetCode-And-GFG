@@ -31,29 +31,20 @@ public:
 class Solution {
   public:
     int getMinimumDays(int n,string a, vector<int> &per) {
-        
         set<pair<int,int>> s;
         pair<int,int> p;
         int st = 0 , en=0 ;
         for(int i=1;i<n;i++){
-            if(a[i]==a[i-1]){
-                en = i;
-            }
-            else{
+            if(a[i]!=a[i-1]){
                 if(st!=en) s.insert({st,en});
                 st = i;
-                en = i;
             }
+            en = i;
         }
         if(st!=en) s.insert({st,en});
-        
         if(s.size()==0) return 0;
-        
-        
         for(int i=0;i<n;i++){
-            
             p = {per[i],INT_MAX};
-            
             auto it = s.upper_bound(p);
             if(it!=s.begin()){
                 it--;
@@ -64,15 +55,9 @@ class Solution {
                     if(p.second-per[i]>1) s.insert({per[i]+1,p.second});
                 }
             }
-            
             if(s.size()==0) return i+1;
-            
         }
-        
         return -1;
-        
-        
-        
     }
 };
 
