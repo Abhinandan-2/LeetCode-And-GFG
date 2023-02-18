@@ -10,16 +10,11 @@ using namespace std;
 class Solution{   
 public:
     int appleSequences(int n, int m, string a){
-        
         int i=0 , j =0,ans=0 ;
         while(i<n){
             if(a[i]=='O'){
-                if(m>0){
-                    m--;
-                }
-                else{
-                    while(a[j]=='A') j++;
-                    j++;
+                if(m>0) m--;
+                elsewhile(a[j++]=='A') {}
                 }
             }
             ans = max(ans,i-j+1);
