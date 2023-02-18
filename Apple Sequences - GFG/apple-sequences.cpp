@@ -14,14 +14,12 @@ public:
         while(i<n){
             if(a[i]=='O'){
                 if(m>0) m--;
-                elsewhile(a[j++]=='A') {}
-                }
+                else while(a[j++]=='A') {}
             }
             ans = max(ans,i-j+1);
             i++;
         }
         return ans;
-        
     }
 };
 
