@@ -101,13 +101,11 @@ bool compare(Node* a, Node* b, vector<pair<int, int>>& mismatch) {
 
 class Solution {
   public:
-  
     void findNode(Node *cur,Node **pre,Node **first,Node **second){
         if(cur){
             findNode(cur->left,pre,first,second);
             if((*pre)!=NULL){
                 if(cur->data<(*pre)->data){
-                    // cout<<cur->data<<" ";
                     if((*first)==NULL) (*first) = (*pre);
                     (*second) = cur;
                 }
@@ -115,20 +113,14 @@ class Solution {
             *pre = cur;
             findNode(cur->right,pre,first,second);
         }
-        // *first = cur;
-        // *second = cur;
         return ;
     }
   
     struct Node *correctBST(struct Node *a) {
-        
         Node *pre= NULL , *cur = a, *first = NULL, *second = NULL;
         findNode(cur,&pre,&first,&second);
-        // int val = first->
-        // cout<<first->data<<" "<<second->data;
         swap(first->data,second->data);
         return a;
-        
     }
 };
 
