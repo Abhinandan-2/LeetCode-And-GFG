@@ -9,13 +9,8 @@ using namespace std;
 
 class Solution{   
 public:
-    int minIteration(int n, int m, int x, int y){    
-        int first = (y-1)+(x-1);
-        int second = (y-1)+(n-x);
-        int third = (m-y)+(x-1);
-        int fourth = (m-y)+(n-x);
-        return max({first,second,third,fourth});
-        
+    int minIteration(int n, int m, int x, int y){  
+        return max({y+x-2,y+n-x-1,m+x-y-1,m+n-x-y});
     }
 };
 
