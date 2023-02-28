@@ -11,24 +11,12 @@ using namespace std;
 class Solution{
 public:
     vector<int> optimalArray(int n,vector<int> &a){
-        
-        int i=1 , j =0 , res = 0 ;
-        vector<int> ans(n);
-        ans[0] = 0; 
-        while(i<n){
-            if(i%2!=0){
-                res += (a[i]-a[j]);
-            }
-            else{
-                j++;
-                res += (a[i]-a[j]);
-            }
-            ans[i]=res;
-            i++;
+        vector<int> ans(n,0);
+        for(int i=1;i<n;i++){
+            // if(i%2==0) j++;
+            ans[i]=ans[i-1]+a[i]-a[i/2];
         }
-        
         return ans;
-        
     }
 };
 
