@@ -18,7 +18,6 @@ class Solution{
             x = i;
             h = res;
             f=0;
-            // cout<<i<<"-> ";
             while(x<=i+m-1){
                 if(y>=i&&y<=i+m-1){
                     h1 = x;
@@ -32,8 +31,6 @@ class Solution{
                             f=1;
                             break;
                         }
-                        // if(a[x]!=b[x-i]) h++;
-                        // if(a[y]!=b[y-i]) h++;
                         x++;
                         y--;
                     }
@@ -48,13 +45,7 @@ class Solution{
                 if(f==1) break;
                 
             }
-            // cout<<endl;
-            if(f==0){
-                // cout<<h;
-                ans = min(ans,h);
-            }
-            // cout<<endl;
-            
+            if(f==0) ans = min(ans,h);
         }
         if(ans==INT_MAX) return -1;
         return ans;
