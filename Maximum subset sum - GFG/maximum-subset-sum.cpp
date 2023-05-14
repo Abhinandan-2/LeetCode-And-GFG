@@ -31,10 +31,9 @@ public:
 class Solution {
   public:
     long long findMaxSubsetSum(int n, vector<int> &a) {
-        vector<long long> ans(n+1,0);
-        ans[1] = a[0];
-        for(int i=2;i<=n;i++) ans[i] = max(ans[i-1],ans[i-2])+a[i-1];
-        return max(ans[n],ans[n-1]);
+        long long second = 0 , first = a[0], temp;
+        for(int i=2;i<=n;i++) temp = max(first,second)+a[i-1], second = first, first = temp;
+        return max(first,second);
     }
 };
 
