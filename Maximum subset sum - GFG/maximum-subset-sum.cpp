@@ -29,10 +29,11 @@ public:
 
 // } Driver Code Ends
 class Solution {
+
   public:
-    long long findMaxSubsetSum(int n, vector<int> &a) {
-        long long second = 0 , first = a[0], temp;
-        for(int i=2;i<=n;i++) temp = max(first,second)+a[i-1], second = first, first = temp;
+    long long findMaxSubsetSum(int N, vector<int> &A) {
+        long long second = 0 , first = A[0], temp;
+        for(int i=2;i<=N;i++) temp = max(first,second)+A[i-1], second = first, first = temp;
         return max(first,second);
     }
 };
