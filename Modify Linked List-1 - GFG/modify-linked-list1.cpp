@@ -45,20 +45,18 @@ struct Node
 */
 class Solution{
     public:
-    void modify(Node *a,Node **b,int &f){
-        if(!a) return ;
-        modify(a->next,b,f);
-        if(a==(*b)||a->next==(*b)) f=0;
-        if(f==0) return ;
+    bool modify(Node *a,Node **b){
+        if(!a) return 1;
+        if(!modify(a->next,b)) return 0;
+        if(a==(*b)||a->next==(*b)) return 0;
         swap((*b)->data,a->data);
         (*b)->data -= a->data;
         (*b) = (*b)->next;
-        return ;
+        return 1;
     }
     struct Node* modifyTheList(struct Node *a){
         Node *temp = a;
-        int f = 1;
-        modify(a,&temp,f);
+        modify(a,&temp);
         return a;
     }
 };
