@@ -12,13 +12,6 @@ public:
         if(p[a]==a) return a;
         return p[a] = find_set(p[a],p);
     }
-    void union_set(int x,int y,vector<int> &p,vector<int> &s){
-            if(s[x]>s[y]) swap(x,y);
-            s[y] += s[x];
-            p[x] = y;
-        
-        return ;
-    }
     void precompute(){
         vector<int> isPrime(1e6,0);
         for(int i=2;i<=1e3;i++) if(isPrime[i]==0) for(int j=i*i;j<1e6;j+=i) isPrime[j] = 1;
@@ -33,7 +26,11 @@ public:
             for(int j=0;j<a[i].size();j++){
                 x = find_set(i-1,p);
                 y = find_set(a[i][j]-1,p);
-                if(x!=y) union_set(x,y,p,s);
+                if(x!=y){
+                    if(s[x]>s[y]) swap(x,y);
+                    s[y] += s[x];
+                    p[x] = y;
+                }
             }
         }
         for(auto &i:s) mx = max(mx,i);
