@@ -11,14 +11,12 @@ class Solution{
 	            res.insert(b);
 	            return ;
 	        }
-	        for(int i=0;i<n;i++){
-	            if(v[i]==0){
-	                v[i]= 1;
-	                b.push_back(a[i]);
-	                call(a,b,v,res);
-	                b.pop_back();
-	                v[i] = 0;
-	            }
+	        for(int i=0;i<n;i++) if(v[i]==0){
+	            v[i]= 1;
+	            b.push_back(a[i]);
+	            call(a,b,v,res);
+	            b.pop_back();
+	            v[i] = 0;
 	        }
 	        return ;
 	    }
