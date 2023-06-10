@@ -9,7 +9,7 @@ class Solution
     public:
         void merge(int a[],int st,int m,int en){
             int len = en-st+1;
-            int t[len];
+            int* t = new int[len];
             int i=st, j= m+1, k =0 ;
             while(i<=m){
                 if(a[i]>=0) break;
@@ -23,9 +23,9 @@ class Solution
             while(j<=en) t[k++] = a[j++];
             k=0;
             for(int i=st;i<=en;i++) a[i] = t[k++];
+            delete[] t;
             return ;
         }
-        
         void divideAndCon(int a[],int st,int en){
             if(st==en) return ;
             int m = st+(en-st)/2;
