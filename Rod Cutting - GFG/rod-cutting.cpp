@@ -11,14 +11,8 @@ using namespace std;
 class Solution{
   public:
     int cutRod(int a[], int n) {
-        vector<int> ans(n);
-        for(int i=0;i<n;i++){
-            ans[i] = a[i];
-            for(int j=i-1,k=0;k<=j;k++,j--){
-                ans[i]= max(ans[i],ans[j]+ans[k]);
-            }
-        }
-        return ans[n-1];
+        for(int i=0;i<n;i++) for(int j=i-1,k=0;k<=j;k++,j--) a[i]= max(a[i],a[j]+a[k]);
+        return a[n-1];
     }
 };
 
