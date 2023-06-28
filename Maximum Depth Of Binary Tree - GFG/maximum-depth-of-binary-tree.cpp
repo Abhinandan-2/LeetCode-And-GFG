@@ -92,9 +92,7 @@ struct Node
 class Solution{
   public:
     int maxDepth(Node *a) {
-        if(!a) return 0;
-        int x = maxDepth(a->left) , y = maxDepth(a->right);
-        return max(x,y)+1;
+        return a ? max(maxDepth(a->left),maxDepth(a->right))+1 : 0;
     }
 };
 
