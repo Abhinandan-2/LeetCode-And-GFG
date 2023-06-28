@@ -91,8 +91,9 @@ struct Node
 
 class Solution{
   public:
-    int maxDepth(Node *a) {
-        return a ? max(maxDepth(a->left),maxDepth(a->right))+1 : 0;
+    /*You are required to complete this method*/
+    int maxDepth(Node *root) {
+        return root ? max(maxDepth(root->left),maxDepth(root->right))+1 : 0;
     }
 };
 
