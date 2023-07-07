@@ -9,17 +9,10 @@ class Solution{
         //Function to merge the arrays.
         void merge(long long a[], long long b[], int n, int m) { 
             int i=0 , j =0 , k= n;
-            while(i<n&&j<m&&k--){
-                if(a[i]>b[j]) j++;
-                else i++;
-            }
+            while(i<n&&j<m&&k--) a[i]>b[j] ? j++ : i++;
             if(j==m) i = n-m;
             j=0;
-            while(i<n){
-                swap(a[i],b[j]);
-                i++;
-                j++;
-            }
+            while(i<n) swap(a[i++],b[j++]);
             sort(a,a+n);
             sort(b,b+m);
             return ;
