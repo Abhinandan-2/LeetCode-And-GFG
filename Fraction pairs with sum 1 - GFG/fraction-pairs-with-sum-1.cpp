@@ -19,14 +19,10 @@ class Solution
         for(auto &i:m){
             vector<int> &v = i.second;
             sort(v.begin(),v.end());
-            // cout<<i.first<<"-> ";
-            // for(auto &k:v) cout<<k<<" ";
-            // cout<<endl;
             len = v.size();
             for(int j=0;j<len;j++){
                 first = lower_bound(v.begin()+j+1,v.end(),i.first-v[j])-v.begin();
                 second = upper_bound(v.begin()+j+1,v.end(),i.first-v[j])-v.begin();
-                // cout<<v[j]<<" " <<first<<" "<<second<<endl;
                 ans += second-first;
             }
         }
